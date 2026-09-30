@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Safe URL Challenge | CyberSafe Academy</title>
+  <meta name="description" content="Practice inspecting URLs and identifying suspicious web addresses with CyberSafe Academy.">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>CyberSafe Academy</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#learn">Learn</a>
+        <a href="../index.html#practice">Practice</a>
+        <a href="../index.html#challenges">Challenges</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#faq">FAQ</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+
+        <p class="eyebrow">PRACTICE LAB</p>
+
+        <h1>Safe URL Challenge</h1>
+
+        <p>
+          Inspect the URL. Don't trust it blindly.
+          Learn how to spot suspicious web addresses before interacting with them.
+        </p>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="lab-card">
+
+          <div class="lab-header">
+            <span class="lab-badge">URL INVESTIGATION</span>
+            <h2>Inspect this web address</h2>
+            <p>
+              Imagine this address appeared in a message asking you to verify your account.
+              What should you check before continuing?
+            </p>
+          </div>
+
+          <div class="browser-demo">
+
+            <div class="browser-bar">
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+
+              <div class="fake-address">
+                https://account.example-security.test/verify
+              </div>
+            </div>
+
+            <div class="browser-content">
+              <p class="browser-label">ADDRESS BREAKDOWN</p>
+
+              <div class="url-breakdown">
+                <span class="url-protocol">https://</span><span class="url-domain">account.example-security.test</span><span class="url-path">/verify</span>
+              </div>
+
+              <div class="breakdown-grid">
+
+                <div>
+                  <strong>Protocol</strong>
+                  <span>https://</span>
+                </div>
+
+                <div>
+                  <strong>Domain</strong>
+                  <span>example-security.test</span>
+                </div>
+
+                <div>
+                  <strong>Path</strong>
+                  <span>/verify</span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <form id="safeUrlForm">
+
+            <fieldset class="investigation-list">
+
+              <legend>What should you check?</legend>
+
+              <label class="check-option">
+                <input type="checkbox" value="domain">
+                <span>
+                  <strong>Examine the actual domain</strong>
+                  <small>Look carefully at the domain instead of focusing only on words that appear in the URL.</small>
+                </span>
+              </label>
+
+              <label class="check-option">
+                <input type="checkbox" value="https">
+                <span>
+                  <strong>Remember that HTTPS alone does not prove legitimacy</strong>
+                  <small>HTTPS protects the connection, but it does not prove that the website itself is trustworthy.</small>
+                </span>
+              </label>
+
+              <label class="check-option">
+                <input type="checkbox" value="subdomain">
+                <span>
+                  <strong>Check subdomains carefully</strong>
+                  <small>Words before the main domain can be misleading.</small>
+                </span>
+              </label>
+
+              <label class="check-option">
+                <input type="checkbox" value="independent">
+                <span>
+                  <strong>Navigate independently if you are suspicious</strong>
+                  <small>Instead of following a questionable link, visit the organization's known website directly.</small>
+                </span>
+              </label>
+
+              <label class="check-option incorrect-option">
+                <input type="checkbox" value="greenlock">
+                <span>
+                  <strong>A padlock means the website is guaranteed safe</strong>
+                  <small>This is not a reliable way to establish the identity or trustworthiness of a website.</small>
+                </span>
+              </label>
+
+              <label class="check-option incorrect-option">
+                <input type="checkbox" value="familiarwords">
+                <span>
+                  <strong>Familiar company words in the URL mean the company owns it</strong>
+                  <small>Attackers can place familiar-looking words in deceptive domains.</small>
+                </span>
+              </label>
+
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary">
+              Check My Answers
+            </button>
+
+          </form>
+
+          <div id="safeUrlResult" class="challenge-result" aria-live="polite"></div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">LEARN FROM THE CHALLENGE</p>
+          <h2>What to remember about URLs</h2>
+        </div>
+
+        <div class="card-grid">
+
+          <article class="info-card">
+            <div class="card-icon">🔎</div>
+            <h3>Check the domain</h3>
+            <p>
+              Don't judge a website by familiar words alone.
+              Identify the actual domain you are visiting.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-icon">🔒</div>
+            <h3>HTTPS is not a trust badge</h3>
+            <p>
+              HTTPS encrypts communication between your browser and the website,
+              but it does not guarantee that the website is legitimate.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-icon">🌐</div>
+            <h3>Understand subdomains</h3>
+            <p>
+              Attackers can use convincing-looking subdomains.
+              Pay attention to where the actual domain ends.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-icon">🛡️</div>
+            <h3>Verify independently</h3>
+            <p>
+              If a message asks you to log in or take urgent action,
+              consider navigating to the organization's known website yourself.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">MORE EXAMPLES</p>
+          <h2>Look at these URLs carefully</h2>
+          <p>
+            These are fictional training examples. Pay attention to the structure
+            rather than assuming that familiar words make a URL trustworthy.
+          </p>
+        </div>
+
+        <div class="url-example-list">
+
+          <div class="url-example">
+            <code>https://login.example.test/account</code>
+            <span>Look at the actual domain.</span>
+          </div>
+
+          <div class="url-example">
+            <code>https://example.test@other.test/login</code>
+            <span>The part after @ can reveal the actual destination domain.</span>
+          </div>
+
+          <div class="url-example">
+            <code>https://security-example.test/verify</code>
+            <span>A familiar-looking security word does not establish ownership.</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div>
+        <h3>CyberSafe Academy</h3>
+        <p>Learn. Practice. Protect.</p>
+      </div>
+
+      <div>
+        <h3>Resources</h3>
+        <a href="../index.html#learn">Learn</a>
+        <a href="../index.html#practice">Practice</a>
+        <a href="../index.html#challenges">Challenges</a>
+      </div>
+
+      <div>
+        <h3>Information</h3>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../disclaimer.html">Disclaimer</a>
+        <a href="../terms.html">Terms &amp; Conditions</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 CyberSafe Academy · Educational Cybersecurity Resources</p>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/safe-browsing.js"></script>
+
+</body>
+</html>
