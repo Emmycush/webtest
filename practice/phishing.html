@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Phishing Detective | CyberSafe Academy</title>
+
+  <meta
+    name="description"
+    content="Practice identifying phishing warning signs with a safe fictional email investigation challenge."
+  >
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a class="brand" href="../index.html" aria-label="CyberSafe Academy home">
+        <span class="brand-mark">🛡️</span>
+
+        <span class="brand-text">
+          <strong>CyberSafe</strong>
+          <span>ACADEMY</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mainNav"
+        aria-label="Open navigation menu"
+      >
+        ☰
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="../index.html#learn">Learn</a>
+        <a href="../index.html#practice">Practice</a>
+        <a href="../index.html#challenges">Challenges</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#faq">FAQ</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main id="main-content">
+
+    <!-- INTRO -->
+
+    <section class="page-hero">
+      <div class="container">
+
+        <p class="eyebrow">PRACTICE LAB · PHISHING</p>
+
+        <h1>
+          Become a
+          <span class="gradient-text">Phishing Detective.</span>
+        </h1>
+
+        <p class="page-intro">
+          Investigate a fictional email and identify the warning signs
+          before deciding whether it should be trusted.
+        </p>
+
+        <div class="lab-notice">
+          <strong>Safe simulation:</strong>
+          This exercise uses fictional information. Do not enter real
+          passwords, personal information, or credentials.
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CHALLENGE -->
+
+    <section class="section">
+      <div class="container">
+
+        <div class="challenge-layout">
+
+          <article class="email-card">
+
+            <div class="email-window-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+
+              <strong>MAILBOX</strong>
+            </div>
+
+            <div class="email-content">
+
+              <div class="email-header">
+
+                <div>
+                  <span class="email-label">FROM</span>
+                  <strong>Microsoft Account Team</strong>
+                </div>
+
+                <div class="email-address">
+                  security-alert@micr0soft-support.example
+                </div>
+
+              </div>
+
+              <div class="email-row">
+                <span class="email-label">TO</span>
+                <span>customer@example.com</span>
+              </div>
+
+              <div class="email-row">
+                <span class="email-label">SUBJECT</span>
+                <strong>URGENT: Your account will be suspended</strong>
+              </div>
+
+              <hr>
+
+              <p>Hello,</p>
+
+              <p>
+                We detected unusual activity on your account.
+                Your account will be permanently suspended within
+                24 hours unless you verify your identity immediately.
+              </p>
+
+              <p>
+                Click the button below to confirm your account
+                information and prevent suspension.
+              </p>
+
+              <a
+                href="#"
+                class="fake-email-button"
+                onclick="return false;"
+              >
+                Verify My Account
+              </a>
+
+              <p>
+                Failure to complete verification may result in
+                permanent loss of access.
+              </p>
+
+              <p>
+                Thank you,<br>
+                Microsoft Security Team
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- INVESTIGATION -->
+
+          <aside class="investigation-card">
+
+            <p class="eyebrow">INVESTIGATION</p>
+
+            <h2>What looks suspicious?</h2>
+
+            <p>
+              Select every warning sign you can identify in the email.
+            </p>
+
+            <form id="phishingForm">
+
+              <label class="investigation-option">
+                <input
+                  type="checkbox"
+                  name="clue"
+                  value="sender"
+                >
+                <span>
+                  The sender address looks suspicious.
+                </span>
+              </label>
+
+              <label class="investigation-option">
+                <input
+                  type="checkbox"
+                  name="clue"
+                  value="urgency"
+                >
+                <span>
+                  The message creates strong urgency.
+                </span>
+              </label>
+
+              <label class="investigation-option">
+                <input
+                  type="checkbox"
+                  name="clue"
+                  value="credential"
+                >
+                <span>
+                  It asks the recipient to verify account information.
+                </span>
+              </label>
+
+              <label class="investigation-option">
+                <input
+                  type="checkbox"
+                  name="clue"
+                  value="link"
+                >
+                <span>
+                  It directs the recipient to click a button.
+                </span>
+              </label>
+
+              <label class="investigation-option">
+                <input
+                  type="checkbox"
+                  name="clue"
+                  value="threat"
+                >
+                <span>
+                  It threatens account loss if the recipient does not act.
+                </span>
+              </label>
+
+              <label class="investigation-option">
+                <input
+                  type="checkbox"
+                  name="clue"
+                  value="weather"
+                >
+                <span>
+                  The email mentions tomorrow's weather forecast.
+                </span>
+              </label>
+
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                Submit Investigation
+              </button>
+
+            </form>
+
+            <div
+              id="phishingResult"
+              class="challenge-result"
+              aria-live="polite"
+            >
+              <div class="result-placeholder">
+                Your investigation result will appear here.
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- LEARNING -->
+
+    <section class="section section-soft">
+
+      <div class="container narrow">
+
+        <p class="eyebrow">LEARNING NOTES</p>
+
+        <h2>Why these clues matter</h2>
+
+        <div class="lesson-points">
+
+          <article>
+            <h3>Check the sender</h3>
+            <p>
+              Attackers may use addresses that imitate legitimate
+              organizations. Look carefully at the actual domain.
+            </p>
+          </article>
+
+          <article>
+            <h3>Slow down when pressured</h3>
+            <p>
+              Urgency and threats are common social-engineering
+              techniques designed to make people act before thinking.
+            </p>
+          </article>
+
+          <article>
+            <h3>Be careful with account requests</h3>
+            <p>
+              Unexpected requests for passwords, codes, payment details,
+              or account verification deserve extra scrutiny.
+            </p>
+          </article>
+
+          <article>
+            <h3>Inspect links before clicking</h3>
+            <p>
+              A familiar-looking button does not guarantee that its
+              destination is trustworthy.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+
+    <div class="container footer-content">
+
+      <div>
+        <strong>CyberSafe Academy</strong>
+        <p>
+          Learn cybersecurity. Practice it. Protect yourself.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#learn">Lessons</a>
+        <a href="../index.html#practice">Practice</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 CyberSafe Academy · Educational Cybersecurity Resources</p>
+    </div>
+
+  </footer>
+
+
+  <script src="../js/script.js"></script>
+  <script src="../js/phishing.js"></script>
+
+</body>
+</html>

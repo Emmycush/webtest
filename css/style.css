@@ -1084,3 +1084,8 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Keep dynamically revealed challenge results below the sticky header */
+.challenge-result {
+  scroll-margin-top: 110px;
+}
