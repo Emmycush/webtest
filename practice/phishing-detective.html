@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phishing Detective | CyberSafe Academy</title>
+  <meta name="description" content="Practice identifying phishing warning signs in a safe fictional email investigation exercise.">
+  <link rel="stylesheet" href="../css/guides.css">
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>🎣 Phishing Detective</h1>
+      <p>Learn to spot warning signs before interacting with a suspicious message.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="lab-header">
+      <span class="lab-badge">SAFE PRACTICE LAB</span>
+      <h2>Can you identify the warning signs?</h2>
+      <p>
+        This is a fictional training exercise. Nothing here connects to a real
+        account, website, or person.
+      </p>
+    </section>
+
+    <article class="email-card">
+      <div class="email-meta">
+        <p><strong>From:</strong> "Account Security" &lt;security@example-training.test&gt;</p>
+        <p><strong>Subject:</strong> URGENT: Your account will be suspended today</p>
+      </div>
+
+      <div class="email-body">
+        <p>Hello Customer,</p>
+
+        <p>
+          We detected unusual activity on your account. To prevent permanent
+          suspension, you must verify your information immediately.
+        </p>
+
+        <p>
+          Click the verification button below within 30 minutes or your account
+          may be locked.
+        </p>
+
+        <p><strong>VERIFY MY ACCOUNT</strong></p>
+
+        <p>
+          Thank you,<br>
+          Account Security Team
+        </p>
+      </div>
+    </article>
+
+    <form id="phishingLab">
+      <h2>Select the warning signs</h2>
+      <p>Choose every clue that makes this message suspicious.</p>
+
+      <div class="clue-grid">
+        <button type="button" class="clue" data-correct="true">
+          The message creates urgency by threatening account suspension.
+        </button>
+
+        <button type="button" class="clue" data-correct="true">
+          It uses a generic greeting instead of identifying the recipient.
+        </button>
+
+        <button type="button" class="clue" data-correct="true">
+          It asks the recipient to verify information through the message.
+        </button>
+
+        <button type="button" class="clue" data-correct="true">
+          It pressures the recipient with a very short deadline.
+        </button>
+
+        <button type="button" class="clue" data-correct="false">
+          The message contains a polite thank-you.
+        </button>
+
+        <button type="button" class="clue" data-correct="false">
+          The message is formatted as an email.
+        </button>
+      </div>
+
+      <div class="lab-actions">
+        <button type="submit">Check My Answer</button>
+        <button type="button" class="reset-button" id="resetLab">Reset</button>
+      </div>
+    </form>
+
+    <section class="feedback" id="feedback" aria-live="polite">
+      <p class="score" id="score"></p>
+      <p id="result"></p>
+
+      <h3>Why these clues matter</h3>
+      <ul>
+        <li><strong>Urgency:</strong> Attackers often use pressure to make people act before thinking.</li>
+        <li><strong>Generic greeting:</strong> A generic message can be a warning sign when a legitimate service normally knows your name.</li>
+        <li><strong>Requests for information:</strong> Unexpected requests to verify sensitive information deserve careful scrutiny.</li>
+        <li><strong>Short deadlines:</strong> Artificial time pressure is commonly used to discourage verification.</li>
+      </ul>
+
+      <p>
+        <strong>Remember:</strong> One clue alone does not prove that an email is malicious.
+        Look at the whole message and verify unexpected requests through an official channel.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const clues = document.querySelectorAll(".clue");
+    const form = document.getElementById("phishingLab");
+    const feedback = document.getElementById("feedback");
+    const score = document.getElementById("score");
+    const result = document.getElementById("result");
+    const resetLab = document.getElementById("resetLab");
+
+    clues.forEach(clue => {
+      clue.addEventListener("click", () => {
+        clue.classList.toggle("selected");
+      });
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      let correct = 0;
+      let selected = 0;
+
+      clues.forEach(clue => {
+        const isSelected = clue.classList.contains("selected");
+        const isCorrect = clue.dataset.correct === "true";
+
+        clue.classList.remove("correct", "incorrect");
+
+        if (isSelected) selected++;
+
+        if (isSelected === isCorrect) {
+          correct++;
+          clue.classList.add("correct");
+        } else {
+          clue.classList.add("incorrect");
+        }
+      });
+
+      const total = clues.length;
+      score.textContent = `Score: ${correct}/${total}`;
+
+      if (selected === 4 && correct === total) {
+        result.textContent =
+          "Excellent work. You identified all four key warning signs without selecting the distractors.";
+      } else if (correct >= 4) {
+        result.textContent =
+          "Good job. You recognized most of the important warning signs. Review the highlighted clues to improve your investigation.";
+      } else {
+        result.textContent =
+          "Keep practicing. Review the highlighted clues and focus on urgency, unexpected requests, and pressure tactics.";
+      }
+
+      feedback.classList.add("visible");
+      feedback.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    resetLab.addEventListener("click", () => {
+      clues.forEach(clue => {
+        clue.classList.remove("selected", "correct", "incorrect");
+      });
+
+      feedback.classList.remove("visible");
+      score.textContent = "";
+      result.textContent = "";
+    });
+  </script>
+</body>
+</html>
