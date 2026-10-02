@@ -228,3 +228,38 @@ document.querySelectorAll("#malware-demo .demo-question").forEach((question) => 
     });
   });
 });
+
+/* Social Engineering Demonstration */
+document.querySelectorAll("#social-engineering-demo .demo-question").forEach((question) => {
+  const correct = question.dataset.answer;
+  const feedback = question.querySelector(".demo-feedback");
+  const buttons = question.querySelectorAll(".demo-options button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((item) => {
+        item.classList.remove("selected", "correct", "incorrect");
+        item.disabled = true;
+      });
+
+      const selected = button.dataset.option;
+      button.classList.add("selected");
+
+      if (selected === correct) {
+        button.classList.add("correct");
+        feedback.textContent =
+          "Good choice. Pausing and verifying unexpected requests helps reduce social engineering risk.";
+      } else {
+        button.classList.add("incorrect");
+
+        const correctButton = question.querySelector(
+          `.demo-options button[data-option="${correct}"]`
+        );
+
+        correctButton.classList.add("correct");
+        feedback.textContent =
+          "Review the highlighted safer response and consider how it reduces manipulation risk.";
+      }
+    });
+  });
+});

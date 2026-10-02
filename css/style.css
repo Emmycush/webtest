@@ -1066,3 +1066,151 @@ section {
   color: var(--muted);
   line-height: 1.6;
 }
+
+/* Social Engineering Demonstration */
+#social-engineering-demo {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+#social-engineering-demo > h3 {
+  margin: 8px 0 10px;
+  font-size: 1.5rem;
+}
+
+#social-engineering-demo > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+#social-engineering-demo .demo-question {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+#social-engineering-demo .demo-question h4 {
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+#social-engineering-demo .demo-options {
+  display: grid;
+  gap: 10px;
+}
+
+#social-engineering-demo .demo-options button {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.5;
+}
+
+#social-engineering-demo .demo-options button:hover,
+#social-engineering-demo .demo-options button:focus-visible {
+  border-color: var(--cyan);
+  outline: none;
+}
+
+#social-engineering-demo .demo-options button.selected {
+  border-color: var(--cyan);
+  background: rgba(53, 217, 255, 0.08);
+}
+
+#social-engineering-demo .demo-options button.correct {
+  border-color: var(--success);
+}
+
+#social-engineering-demo .demo-options button.incorrect {
+  border-color: var(--danger);
+}
+
+#social-engineering-demo .demo-feedback {
+  min-height: 24px;
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Social Engineering Demonstration */
+#social-engineering-demo {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+#social-engineering-demo > h3 {
+  margin: 8px 0 10px;
+  font-size: 1.5rem;
+}
+
+#social-engineering-demo > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+#social-engineering-demo .demo-question {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+#social-engineering-demo .demo-question h4 {
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+#social-engineering-demo .demo-options {
+  display: grid;
+  gap: 10px;
+}
+
+#social-engineering-demo .demo-options button {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.5;
+}
+
+#social-engineering-demo .demo-options button:hover,
+#social-engineering-demo .demo-options button:focus-visible {
+  border-color: var(--cyan);
+  outline: none;
+}
+
+#social-engineering-demo .demo-options button.selected {
+  border-color: var(--cyan);
+  background: rgba(53, 217, 255, 0.08);
+}
+
+#social-engineering-demo .demo-options button.correct {
+  border-color: var(--success);
+}
+
+#social-engineering-demo .demo-options button.incorrect {
+  border-color: var(--danger);
+}
+
+#social-engineering-demo .demo-feedback {
+  min-height: 24px;
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
