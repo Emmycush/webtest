@@ -918,3 +918,77 @@ section {
   color: var(--muted);
   line-height: 1.6;
 }
+
+/* Safe Browsing Demonstration */
+#safe-browsing .demo-card {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+#safe-browsing .demo-card > h3 {
+  margin: 8px 0 10px;
+  font-size: 1.5rem;
+}
+
+#safe-browsing .demo-card > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+#safe-browsing .demo-question {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+#safe-browsing .demo-question h4 {
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+#safe-browsing .demo-options {
+  display: grid;
+  gap: 10px;
+}
+
+#safe-browsing .demo-options button {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.5;
+}
+
+#safe-browsing .demo-options button:hover,
+#safe-browsing .demo-options button:focus-visible {
+  border-color: var(--cyan);
+  outline: none;
+}
+
+#safe-browsing .demo-options button.selected {
+  border-color: var(--cyan);
+  background: rgba(53, 217, 255, 0.08);
+}
+
+#safe-browsing .demo-options button.correct {
+  border-color: var(--success);
+}
+
+#safe-browsing .demo-options button.incorrect {
+  border-color: var(--danger);
+}
+
+#safe-browsing .demo-feedback {
+  min-height: 24px;
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
