@@ -123,3 +123,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* Two-Factor Authentication Demonstration */
+document.querySelectorAll("#two-factor .demo-question").forEach((question) => {
+  const correct = question.dataset.answer;
+  const feedback = question.querySelector(".demo-feedback");
+  const buttons = question.querySelectorAll(".demo-options button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((item) => {
+        item.classList.remove("selected", "correct", "incorrect");
+        item.disabled = true;
+      });
+
+      const selected = button.dataset.option;
+      button.classList.add("selected");
+
+      if (selected === correct) {
+        button.classList.add("correct");
+        feedback.textContent =
+          "Good choice. This practice adds protection against common account-security risks.";
+      } else {
+        button.classList.add("incorrect");
+
+        const correctButton = question.querySelector(
+          `.demo-options button[data-option="${correct}"]`
+        );
+
+        correctButton.classList.add("correct");
+        feedback.textContent =
+          "Review the highlighted safer option and consider why it provides stronger account protection.";
+      }
+    });
+  });
+});

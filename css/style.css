@@ -844,3 +844,77 @@ section {
     animation: none !important;
   }
 }
+
+/* 2FA Demonstration */
+#two-factor .demo-card {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+#two-factor .demo-card > h3 {
+  margin: 8px 0 10px;
+  font-size: 1.5rem;
+}
+
+#two-factor .demo-card > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+#two-factor .demo-question {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+#two-factor .demo-question h4 {
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+#two-factor .demo-options {
+  display: grid;
+  gap: 10px;
+}
+
+#two-factor .demo-options button {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.5;
+}
+
+#two-factor .demo-options button:hover,
+#two-factor .demo-options button:focus-visible {
+  border-color: var(--cyan);
+  outline: none;
+}
+
+#two-factor .demo-options button.selected {
+  border-color: var(--cyan);
+  background: rgba(53, 217, 255, 0.08);
+}
+
+#two-factor .demo-options button.correct {
+  border-color: var(--success);
+}
+
+#two-factor .demo-options button.incorrect {
+  border-color: var(--danger);
+}
+
+#two-factor .demo-feedback {
+  min-height: 24px;
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
