@@ -54,8 +54,42 @@
         <a href="#faq">FAQ</a>
       </nav>
 
+      <button
+        class="search-toggle"
+        id="searchToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-search"
+        aria-label="Open site search"
+      >
+        Search
+      </button>
+
     </div>
   </header>
+
+  <div class="site-search" id="site-search" hidden>
+    <div class="container">
+      <label for="siteSearchInput">Search CyberSafe Academy</label>
+      <div class="site-search-row">
+        <input
+          id="siteSearchInput"
+          type="search"
+          placeholder="Search cybersecurity topics..."
+          autocomplete="off"
+          aria-describedby="siteSearchResults"
+        >
+        <button class="btn btn-secondary" id="siteSearchClose" type="button">
+          Close
+        </button>
+      </div>
+      <div
+        class="site-search-results"
+        id="siteSearchResults"
+        aria-live="polite"
+      ></div>
+    </div>
+  </div>
 
   <main id="main-content">
 
