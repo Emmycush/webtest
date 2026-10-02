@@ -152,6 +152,9 @@
       if (selected === 4 && correct === total) {
         result.textContent =
           "Excellent work. You identified all four key warning signs without selecting the distractors.";
+        if (typeof markLearningActivityComplete === "function") {
+          markLearningActivityComplete("phishing");
+        }
       } else if (correct >= 4) {
         result.textContent =
           "Good job. You recognized most of the important warning signs. Review the highlighted clues to improve your investigation.";
@@ -174,5 +177,6 @@
       result.textContent = "";
     });
   </script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

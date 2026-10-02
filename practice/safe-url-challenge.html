@@ -153,6 +153,10 @@
         ? "Option B is suspicious because the real domain is example-training.test, not example.com."
         : "The suspicious choice is Option B. Look at the domain immediately before the first single slash after the host.";
 
+      if (correct && typeof markLearningActivityComplete === "function") {
+        markLearningActivityComplete("safeUrl");
+      }
+
       feedback.classList.add("visible");
       feedback.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -167,5 +171,6 @@
       summary.textContent = "";
     });
   </script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

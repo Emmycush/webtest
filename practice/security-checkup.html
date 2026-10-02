@@ -152,6 +152,9 @@
 
       if (percentage === 100) {
         summary.textContent = "Excellent coverage. Keep reviewing these habits as your devices, accounts, and online activity change.";
+        if (typeof markLearningActivityComplete === "function") {
+          markLearningActivityComplete("checkup");
+        }
       } else if (percentage >= 75) {
         summary.textContent = "Good coverage. Focus on the remaining unchecked areas to strengthen your everyday security habits.";
       } else if (percentage >= 50) {
@@ -188,5 +191,6 @@
       advice.innerHTML = "";
     });
   </script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

@@ -444,3 +444,74 @@ siteSearchInput?.addEventListener("keydown", (event) => {
     searchToggle?.focus();
   }
 });
+
+/* Local learning progress */
+
+const progressStorageKey = "cybersafeAcademyProgress";
+
+const progressActivities = {
+  phishing: "Phishing Detective",
+  safeUrl: "Safe URL Challenge",
+  checkup: "Security Checkup"
+};
+
+function getLearningProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(progressStorageKey));
+    return saved && typeof saved === "object" ? saved : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveLearningProgress(progress) {
+  try {
+    localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+  } catch (error) {
+    // Progress remains available for the current page session if storage is unavailable.
+  }
+}
+
+function markLearningActivityComplete(activity) {
+  if (!progressActivities[activity]) return;
+
+  const progress = getLearningProgress();
+  progress[activity] = true;
+  saveLearningProgress(progress);
+  updateLearningProgress();
+}
+
+function updateLearningProgress() {
+  const progress = getLearningProgress();
+  const keys = Object.keys(progressActivities);
+  const completed = keys.filter((key) => progress[key]).length;
+  const total = keys.length;
+  const percentage = total ? Math.round((completed / total) * 100) : 0;
+
+  const progressBar = document.getElementById("progressBar");
+  const progressCount = document.getElementById("progressCount");
+  const progressSummary = document.getElementById("progressSummary");
+
+  if (progressBar) {
+    progressBar.style.width = `${percentage}%`;
+  }
+
+  if (progressCount) {
+    progressCount.textContent = `${completed} / ${total}`;
+  }
+
+  if (progressSummary) {
+    if (completed === total) {
+      progressSummary.textContent =
+        "Great work. You have completed all three current practice activities on this device.";
+    } else if (completed > 0) {
+      progressSummary.textContent =
+        `${completed} of ${total} practice activities completed. Keep going and build your security skills.`;
+    } else {
+      progressSummary.textContent =
+        "Complete the practice activities to track your progress on this device.";
+    }
+  }
+}
+
+updateLearningProgress();
