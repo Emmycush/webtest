@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safe URL Challenge | CyberSafe Academy</title>
+  <meta name="description" content="Practice identifying suspicious URLs in a safe cybersecurity learning exercise.">
+  <link rel="stylesheet" href="../css/guides.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <p><strong>CyberSafe Academy</strong></p>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Lessons</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="lab-header">
+      <span class="lab-badge">SAFE PRACTICE LAB</span>
+      <h1>🌐 Safe URL Challenge</h1>
+      <p>Inspect example web addresses and decide which ones deserve caution.</p>
+    </section>
+
+    <section class="url-card">
+      <h2>Can you spot the suspicious URL?</h2>
+      <p>
+        Choose the URL you would treat as suspicious. These examples are fictional
+        and are provided only for cybersecurity education.
+      </p>
+
+      <form id="urlChallenge">
+        <div class="url-options">
+          <button type="button" class="url-option" data-answer="safe">
+            <strong>Option A</strong>
+            <code>https://www.example.com/account/security</code>
+          </button>
+
+          <button type="button" class="url-option" data-answer="suspicious">
+            <strong>Option B</strong>
+            <code>https://example.com.verify-account.example-training.test/login</code>
+          </button>
+
+          <button type="button" class="url-option" data-answer="safe">
+            <strong>Option C</strong>
+            <code>https://www.example.com/help/contact</code>
+          </button>
+
+          <button type="button" class="url-option" data-answer="safe">
+            <strong>Option D</strong>
+            <code>https://www.example.com/learn/security</code>
+          </button>
+        </div>
+
+        <div class="lab-actions">
+          <button type="submit">Check My Answer</button>
+          <button type="button" class="reset-button" id="resetUrl">Reset</button>
+        </div>
+      </form>
+
+      <section class="feedback" id="urlFeedback" aria-live="polite">
+        <p class="score" id="urlScore"></p>
+        <p id="urlSummary"></p>
+        <ul>
+          <li>
+            <strong>Read the real domain:</strong>
+            In a URL, the registered domain is more important than a familiar-looking
+            word placed before it.
+          </li>
+          <li>
+            <strong>Watch for misleading subdomains:</strong>
+            Attackers can place trusted-looking words in a subdomain to make a
+            destination appear legitimate.
+          </li>
+          <li>
+            <strong>HTTPS is not proof of trust:</strong>
+            HTTPS encrypts the connection, but it does not guarantee that the website
+            itself is legitimate.
+          </li>
+          <li>
+            <strong>Slow down:</strong>
+            When a link arrives unexpectedly, check the full address before entering
+            passwords, payment details, or other sensitive information.
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <section>
+      <h2>What to remember</h2>
+      <p>
+        Never judge a link only by its first word, its appearance, or the presence
+        of HTTPS. Inspect the actual domain and consider why you received the link.
+      </p>
+      <p>
+        <a href="../phishing-attack-beginners-guide.html">Continue learning about phishing →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 CyberSafe Academy · Educational Cybersecurity Resources</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("urlChallenge");
+    const options = document.querySelectorAll(".url-option");
+    const feedback = document.getElementById("urlFeedback");
+    const score = document.getElementById("urlScore");
+    const summary = document.getElementById("urlSummary");
+    const reset = document.getElementById("resetUrl");
+
+    let selected = null;
+
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        options.forEach(item => item.classList.remove("selected"));
+        option.classList.add("selected");
+        selected = option.dataset.answer;
+      });
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (!selected) {
+        score.textContent = "Choose an option first.";
+        summary.textContent = "Select the URL you think is suspicious, then check your answer.";
+        feedback.classList.add("visible");
+        return;
+      }
+
+      const correct = selected === "suspicious";
+
+      options.forEach(option => {
+        option.classList.remove("correct", "incorrect");
+
+        if (option.dataset.answer === "suspicious") {
+          option.classList.add("correct");
+        } else if (option.classList.contains("selected")) {
+          option.classList.add("incorrect");
+        }
+      });
+
+      score.textContent = correct ? "Correct!" : "Not quite.";
+      summary.textContent = correct
+        ? "Option B is suspicious because the real domain is example-training.test, not example.com."
+        : "The suspicious choice is Option B. Look at the domain immediately before the first single slash after the host.";
+
+      feedback.classList.add("visible");
+      feedback.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    reset.addEventListener("click", () => {
+      selected = null;
+      options.forEach(option => {
+        option.classList.remove("selected", "correct", "incorrect");
+      });
+      feedback.classList.remove("visible");
+      score.textContent = "";
+      summary.textContent = "";
+    });
+  </script>
+</body>
+</html>
