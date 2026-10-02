@@ -193,3 +193,38 @@ document.querySelectorAll("#safe-browsing .demo-question").forEach((question) =>
     });
   });
 });
+
+/* Malware Demonstration */
+document.querySelectorAll("#malware-demo .demo-question").forEach((question) => {
+  const correct = question.dataset.answer;
+  const feedback = question.querySelector(".demo-feedback");
+  const buttons = question.querySelectorAll(".demo-options button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((item) => {
+        item.classList.remove("selected", "correct", "incorrect");
+        item.disabled = true;
+      });
+
+      const selected = button.dataset.option;
+      button.classList.add("selected");
+
+      if (selected === correct) {
+        button.classList.add("correct");
+        feedback.textContent =
+          "Good choice. This response helps reduce the risk of further malware-related harm.";
+      } else {
+        button.classList.add("incorrect");
+
+        const correctButton = question.querySelector(
+          `.demo-options button[data-option="${correct}"]`
+        );
+
+        correctButton.classList.add("correct");
+        feedback.textContent =
+          "Review the highlighted safer response and consider why it reduces malware-related risk.";
+      }
+    });
+  });
+});

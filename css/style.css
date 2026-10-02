@@ -992,3 +992,77 @@ section {
   color: var(--muted);
   line-height: 1.6;
 }
+
+/* Malware Demonstration */
+#malware-demo {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+#malware-demo > h3 {
+  margin: 8px 0 10px;
+  font-size: 1.5rem;
+}
+
+#malware-demo > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+#malware-demo .demo-question {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+#malware-demo .demo-question h4 {
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+#malware-demo .demo-options {
+  display: grid;
+  gap: 10px;
+}
+
+#malware-demo .demo-options button {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.5;
+}
+
+#malware-demo .demo-options button:hover,
+#malware-demo .demo-options button:focus-visible {
+  border-color: var(--cyan);
+  outline: none;
+}
+
+#malware-demo .demo-options button.selected {
+  border-color: var(--cyan);
+  background: rgba(53, 217, 255, 0.08);
+}
+
+#malware-demo .demo-options button.correct {
+  border-color: var(--success);
+}
+
+#malware-demo .demo-options button.incorrect {
+  border-color: var(--danger);
+}
+
+#malware-demo .demo-feedback {
+  min-height: 24px;
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
