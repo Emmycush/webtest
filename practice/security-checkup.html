@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Checkup | CyberSafe Academy</title>
+  <meta name="description" content="Complete a practical cybersecurity checkup for your accounts, phone, browsing habits, and online activity.">
+  <link rel="stylesheet" href="../css/guides.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <p><strong>CyberSafe Academy</strong></p>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../index.html#topics">Lessons</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="lab-header">
+      <span class="lab-badge">SAFE PRACTICE LAB</span>
+      <h1>📱 Security Checkup</h1>
+      <p>Review practical security habits and find areas where you can improve.</p>
+    </section>
+
+    <section class="checkup-card">
+      <h2>Complete your security checkup</h2>
+      <p>
+        Check each statement that is true for you. This is an educational self-audit,
+        not a technical security scan.
+      </p>
+
+      <form id="securityCheckup">
+        <div class="checklist">
+          <label class="check-item">
+            <input type="checkbox" value="passwords">
+            <span>
+              <strong>I use a unique, strong password for important accounts.</strong>
+              <small>Reusing passwords can allow one compromised account to affect others.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="2fa">
+            <span>
+              <strong>I use two-factor authentication on important accounts.</strong>
+              <small>2FA adds another verification step beyond your password.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="updates">
+            <span>
+              <strong>I keep my phone, computer, browser, and apps updated.</strong>
+              <small>Updates can include security fixes for known vulnerabilities.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="links">
+            <span>
+              <strong>I check unexpected links before opening them.</strong>
+              <small>Inspect the destination and consider why the message was sent.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="wifi">
+            <span>
+              <strong>I avoid entering sensitive information on untrusted public Wi-Fi.</strong>
+              <small>Use trusted networks or appropriate protections when handling sensitive activity.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="privacy">
+            <span>
+              <strong>I review privacy and security settings on important accounts.</strong>
+              <small>Check recovery options, active sessions, permissions, and privacy controls.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="backups">
+            <span>
+              <strong>I keep important files backed up.</strong>
+              <small>Backups can help recover from device loss, accidental deletion, or malware.</small>
+            </span>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" value="scams">
+            <span>
+              <strong>I pause when a message creates urgency or asks for sensitive information.</strong>
+              <small>Pressure and unexpected requests are common warning signs in scams.</small>
+            </span>
+          </label>
+        </div>
+
+        <div class="lab-actions">
+          <button type="submit">Check My Security</button>
+          <button type="button" class="reset-button" id="resetCheckup">Reset</button>
+        </div>
+      </form>
+
+      <section class="feedback" id="checkupFeedback" aria-live="polite">
+        <p class="score" id="checkupScore"></p>
+        <p id="checkupSummary"></p>
+        <div id="checkupAdvice"></div>
+      </section>
+    </section>
+
+    <section>
+      <h2>Keep improving</h2>
+      <p>
+        A security checkup is a snapshot, not a guarantee. Revisit your settings
+        regularly and learn more about the areas where you found gaps.
+      </p>
+      <p>
+        <a href="../practical-safety-checklists.html">Continue with practical safety checklists →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 CyberSafe Academy · Educational Cybersecurity Resources</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("securityCheckup");
+    const items = document.querySelectorAll('.check-item input[type="checkbox"]');
+    const feedback = document.getElementById("checkupFeedback");
+    const score = document.getElementById("checkupScore");
+    const summary = document.getElementById("checkupSummary");
+    const advice = document.getElementById("checkupAdvice");
+    const reset = document.getElementById("resetCheckup");
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const checked = [...items].filter(item => item.checked);
+      const total = items.length;
+      const count = checked.length;
+      const percentage = Math.round((count / total) * 100);
+
+      score.textContent = `Security habits checked: ${count}/${total} (${percentage}%)`;
+
+      if (percentage === 100) {
+        summary.textContent = "Excellent coverage. Keep reviewing these habits as your devices, accounts, and online activity change.";
+      } else if (percentage >= 75) {
+        summary.textContent = "Good coverage. Focus on the remaining unchecked areas to strengthen your everyday security habits.";
+      } else if (percentage >= 50) {
+        summary.textContent = "You have several useful habits in place. Work through the unchecked areas one at a time.";
+      } else {
+        summary.textContent = "This checkup found several areas to improve. Start with strong passwords and two-factor authentication, then work through the rest.";
+      }
+
+      const unchecked = [...items].filter(item => !item.checked);
+
+      if (unchecked.length) {
+        const names = unchecked.map(item => item.closest(".check-item").querySelector("strong").textContent);
+        advice.innerHTML = `
+          <h3>Areas to review</h3>
+          <ul>
+            ${names.map(name => `<li>${name}</li>`).join("")}
+          </ul>
+        `;
+      } else {
+        advice.innerHTML = "<h3>All areas checked</h3><p>Keep these habits consistent and revisit the checkup periodically.</p>";
+      }
+
+      feedback.classList.add("visible");
+      feedback.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    reset.addEventListener("click", () => {
+      items.forEach(item => {
+        item.checked = false;
+      });
+      feedback.classList.remove("visible");
+      score.textContent = "";
+      summary.textContent = "";
+      advice.innerHTML = "";
+    });
+  </script>
+</body>
+</html>
