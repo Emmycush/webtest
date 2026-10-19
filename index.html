@@ -488,7 +488,43 @@
       </div>
     </section>
 
-    <section class="practice-section" id="practice">
+
+    <section class="safe-link-lab" id="safe-link-inspector" aria-labelledby="safe-link-title">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">LOCAL URL ANALYSIS</span>
+          <h2 id="safe-link-title">Safe Link Inspector<span class="safe-link-dot">.</span></h2>
+          <p>Learn to read a link before you open it. This tool examines URL structure in your browser; it does not visit the website or verify its reputation.</p>
+        </div>
+
+        <div class="safe-link-tool">
+          <label for="safeLinkInput">Paste a URL to inspect</label>
+          <textarea id="safeLinkInput" rows="3" maxlength="2048"
+            placeholder="https://example.com/page"
+            autocomplete="off" autocapitalize="off" spellcheck="false"
+            aria-describedby="safeLinkPrivacy"></textarea>
+
+          <div class="safe-link-actions">
+            <button type="button" id="inspectSafeLink" class="safe-link-button">Inspect URL</button>
+            <button type="button" id="clearSafeLink" class="safe-link-button safe-link-button-secondary">Clear</button>
+          </div>
+
+          <p class="safe-link-privacy" id="safeLinkPrivacy">Privacy: analysis happens locally in this page. The URL is not submitted to a scanning service or opened.</p>
+          <div id="safeLinkResult" class="safe-link-result" hidden aria-live="polite" aria-atomic="true"></div>
+        </div>
+
+        <div class="safe-link-learning">
+          <h3>Three things to remember</h3>
+          <ul>
+            <li>Read the actual hostname from right to left. In <code>accounts.example.com.attacker.test</code>, the hostname ends in <code>attacker.test</code>.</li>
+            <li>A padlock or HTTPS means the connection is encrypted; it does not prove the site is honest.</li>
+            <li>Unexpected prizes, urgent account warnings, payment requests, and pressure to act deserve independent verification.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+<section class="practice-section" id="practice">
       <div class="container">
 
         <div class="section-heading">
