@@ -514,4 +514,11 @@ function updateLearningProgress() {
   }
 }
 
+const missionProgressSlot = document.getElementById("mission-progress-slot");
+const existingProgressPanel = document.getElementById("progress-panel");
+
+if (missionProgressSlot && existingProgressPanel) {
+  missionProgressSlot.appendChild(existingProgressPanel);
+}
+
 updateLearningProgress();
