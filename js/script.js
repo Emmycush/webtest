@@ -734,6 +734,74 @@ updateLearningProgress();
       });
     }
 
+    // Lookalike checks are educational clues, never proof of impersonation.
+    const normalizedHost = hostname.toLowerCase();
+    const hostLabels = normalizedHost.split(".");
+
+    const familiarBrands = [
+      { name: "paypal", label: "PayPal" },
+      { name: "google", label: "Google" },
+      { name: "amazon", label: "Amazon" },
+      { name: "microsoft", label: "Microsoft" },
+      { name: "apple", label: "Apple" }
+    ];
+
+    // Basic visual substitutions only; this is not a complete spoof detector.
+    const normalizeLookalikes = value =>
+      value.replace(/0/g, "o").replace(/[1i]/g, "l");
+
+    const lookalikeMatches = [];
+
+    for (const label of hostLabels) {
+      const normalizedLabel = normalizeLookalikes(label);
+
+      for (const brand of familiarBrands) {
+        if (
+          normalizedLabel.includes(brand.name) &&
+          !label.includes(brand.name)
+        ) {
+          lookalikeMatches.push(brand.label);
+        }
+      }
+    }
+
+    if (lookalikeMatches.length) {
+      clues.push({
+        title: "Possible lookalike spelling",
+        detail: "A hostname label resembles " +
+          [...new Set(lookalikeMatches)].join(", ") +
+          " after basic character normalization. This heuristic can miss variations or flag unrelated names; it does not prove impersonation.",
+        action: "Compare the exact hostname with the official domain obtained independently. Do not sign in or pay until you verify the destination."
+      });
+    }
+
+    const estimated = estimateDomain(normalizedHost).value;
+    const estimatedParts = estimated === "Not available"
+      ? []
+      : estimated.split(".");
+
+    if (estimatedParts.length > 0) {
+      const prefixLabels = hostLabels.slice(
+        0,
+        Math.max(0, hostLabels.length - estimatedParts.length)
+      );
+      const familiarNames = [
+        "paypal", "google", "amazon", "microsoft", "apple"
+      ];
+
+      const brandLikeLabelOutsideEstimate = familiarNames.some(brand =>
+        prefixLabels.some(label => label.includes(brand))
+      );
+
+      if (brandLikeLabelOutsideEstimate) {
+        clues.push({
+          title: "Familiar brand-like text appears before the estimated domain",
+          detail: "A hostname label before the estimated domain ending contains a familiar brand name. Subdomains can be controlled by a different site operator.",
+          action: "Check the actual domain ending in the hostname breakdown. The estimate uses limited suffix rules and may be incorrect."
+        });
+      }
+    }
+
     const hostTerms = suspiciousTerms.filter(term =>
       hostname.split(/[^a-z0-9]+/).includes(term)
     );
