@@ -816,6 +816,53 @@ updateLearningProgress();
     result.appendChild(overview);
     addText(result, "p", domain.note);
 
+    // Educational hostname breakdown — an estimate, not ownership verification.
+    const hostPanel = document.createElement("div");
+    hostPanel.className = "safe-link-host-breakdown";
+
+    addText(hostPanel, "h4", "Hostname breakdown");
+    addText(
+      hostPanel,
+      "p",
+      "Read the hostname from right to left. Familiar words appearing earlier in the hostname do not establish who controls the domain."
+    );
+
+    const hostDetails = document.createElement("ul");
+    [
+      ["Full hostname", hostname],
+      ["Estimated domain ending", domain.value]
+    ].forEach(([label, value]) => {
+      const li = document.createElement("li");
+      addText(li, "strong", label + ": ");
+      addText(li, "code", value);
+      hostDetails.appendChild(li);
+    });
+    hostPanel.appendChild(hostDetails);
+
+    if (hostname !== domain.value && hostname.endsWith("." + domain.value)) {
+      const prefix = hostname.slice(0, -(domain.value.length + 1));
+      addText(hostPanel, "p", "Hostname prefix before the estimate: " + prefix, "safe-link-host-prefix");
+      addText(
+        hostPanel,
+        "p",
+        "This prefix is part of the hostname, not proof that the estimated domain belongs to a familiar company."
+      );
+    } else {
+      addText(
+        hostPanel,
+        "p",
+        "The hostname and estimated domain are the same under this tool's limited suffix rules. This does not verify ownership or reputation."
+      );
+    }
+
+    addText(
+      hostPanel,
+      "p",
+      "Important: this is a best-effort educational breakdown. The suffix rules are limited and may not identify the registrable domain correctly for every address."
+    );
+
+    result.appendChild(hostPanel);
+
     addSection("Significant warning signs", strong);
     addSection("Other clues to review", clues);
     addSection("What looks ordinary", positiveObservations);

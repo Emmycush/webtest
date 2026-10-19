@@ -1597,3 +1597,31 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .safe-link-button { transition: none; }
 }
+
+/* SAFE LINK INSPECTOR — hostname education panel */
+.safe-link-host-breakdown {
+  margin: 18px 0;
+  padding: 18px;
+  border: 1px solid var(--cyan-bright);
+  border-left: 4px solid var(--cyan-bright);
+  border-radius: 10px;
+  background: rgba(53, 217, 255, .055);
+}
+.safe-link-host-breakdown h4 {
+  margin: 0 0 10px;
+  color: var(--cyan-bright);
+}
+.safe-link-host-breakdown p,
+.safe-link-host-breakdown li {
+  overflow-wrap: anywhere;
+}
+.safe-link-host-breakdown ul {
+  padding-left: 20px;
+}
+.safe-link-host-breakdown code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.safe-link-host-prefix {
+  font-weight: 750;
+}
