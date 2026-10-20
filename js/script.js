@@ -124,145 +124,150 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* Two-Factor Authentication Demonstration */
-document.querySelectorAll("#two-factor .demo-question").forEach((question) => {
-  const correct = question.dataset.answer;
-  const feedback = question.querySelector(".demo-feedback");
-  const buttons = question.querySelectorAll(".demo-options button");
+/* SCORED CYBERSECURITY DEMONSTRATIONS */
+(() => {
+  const quizConfigs = [
+    {
+      selector: "#two-factor",
+      title: "Two-Factor Authentication Quiz",
+      explanation: "Using a second verification step adds protection beyond a password. Never share verification codes with people who contact you unexpectedly."
+    },
+    {
+      selector: "#safe-browsing",
+      title: "Safe Browsing Quiz",
+      explanation: "Check website addresses carefully, avoid unexpected downloads, and reach sensitive accounts through trusted routes. HTTPS alone does not prove a site is trustworthy."
+    },
+    {
+      selector: "#malware-demo",
+      title: "Malware Safety Quiz",
+      explanation: "Pause suspicious activity, avoid unknown downloads, and use trusted security or recovery guidance. Do not disable protections to make suspicious software run."
+    },
+    {
+      selector: "#social-engineering-demo",
+      title: "Social Engineering Quiz",
+      explanation: "Urgency and claims of authority can be manipulation tactics. Verify unexpected requests through a separate, official channel and never disclose your password."
+    }
+  ];
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((item) => {
-        item.classList.remove("selected", "correct", "incorrect");
-        item.disabled = true;
+  quizConfigs.forEach((config) => {
+    const root = document.querySelector(config.selector);
+    if (!root) return;
+
+    const questions = Array.from(root.querySelectorAll(".demo-question"));
+    if (!questions.length) return;
+
+    let score = 0;
+    let answered = 0;
+
+    const panel = document.createElement("div");
+    panel.className = "quiz-score-panel";
+    panel.setAttribute("aria-label", config.title);
+
+    const heading = document.createElement("p");
+    heading.className = "quiz-score-heading";
+    heading.textContent = config.title;
+
+    const status = document.createElement("p");
+    status.className = "quiz-score-status";
+    status.setAttribute("aria-live", "polite");
+    status.textContent = `Score: 0 / ${questions.length} · Answer all questions to finish`;
+
+    const retry = document.createElement("button");
+    retry.type = "button";
+    retry.className = "btn btn-primary quiz-retry";
+    retry.textContent = "Try Again";
+    retry.hidden = true;
+
+    panel.append(heading, status, retry);
+    questions[0].parentNode.insertBefore(panel, questions[0]);
+
+    questions.forEach((question) => {
+      const correct = question.dataset.answer;
+      const feedback = question.querySelector(".demo-feedback");
+      const buttons = Array.from(
+        question.querySelectorAll(".demo-options button")
+      );
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (buttons.some((item) => item.disabled)) return;
+
+          const selected = button.dataset.option;
+          const isCorrect = selected === correct;
+
+          buttons.forEach((item) => {
+            item.disabled = true;
+            item.classList.remove("selected", "correct", "incorrect");
+          });
+
+          button.classList.add("selected");
+
+          if (isCorrect) {
+            score += 1;
+            button.classList.add("correct");
+            feedback.textContent =
+              `Correct! ${config.explanation}`;
+          } else {
+            button.classList.add("incorrect");
+            const correctButton = buttons.find(
+              (item) => item.dataset.option === correct
+            );
+
+            if (correctButton) correctButton.classList.add("correct");
+
+            const correctText = correctButton
+              ? correctButton.textContent.trim()
+              : "the highlighted answer";
+
+            feedback.textContent =
+              `Not quite. The safer choice is: ${correctText}. ${config.explanation}`;
+          }
+
+          answered += 1;
+          status.textContent =
+            `Score: ${score} / ${questions.length} · Answered ${answered} of ${questions.length}`;
+
+          if (answered === questions.length) {
+            const percentage = Math.round(
+              (score / questions.length) * 100
+            );
+
+            status.textContent =
+              `Final score: ${score} / ${questions.length} (${percentage}%). ` +
+              (score === questions.length
+                ? "Excellent work!"
+                : score >= Math.ceil(questions.length * 2 / 3)
+                  ? "Good progress. Review any missed answers."
+                  : "Keep learning and try again.");
+
+            retry.hidden = false;
+          }
+        });
+      });
+    });
+
+    retry.addEventListener("click", () => {
+      score = 0;
+      answered = 0;
+
+      questions.forEach((question) => {
+        question.querySelectorAll(".demo-options button").forEach((button) => {
+          button.disabled = false;
+          button.classList.remove("selected", "correct", "incorrect");
+        });
+
+        const feedback = question.querySelector(".demo-feedback");
+        if (feedback) feedback.textContent = "";
       });
 
-      const selected = button.dataset.option;
-      button.classList.add("selected");
+      status.textContent =
+        `Score: 0 / ${questions.length} · Answer all questions to finish`;
+      retry.hidden = true;
 
-      if (selected === correct) {
-        button.classList.add("correct");
-        feedback.textContent =
-          "Good choice. This practice adds protection against common account-security risks.";
-      } else {
-        button.classList.add("incorrect");
-
-        const correctButton = question.querySelector(
-          `.demo-options button[data-option="${correct}"]`
-        );
-
-        correctButton.classList.add("correct");
-        feedback.textContent =
-          "Review the highlighted safer option and consider why it provides stronger account protection.";
-      }
+      questions[0].scrollIntoView({ behavior: "smooth", block: "center" });
     });
   });
-});
-
-/* Safe Browsing Demonstration */
-document.querySelectorAll("#safe-browsing .demo-question").forEach((question) => {
-  const correct = question.dataset.answer;
-  const feedback = question.querySelector(".demo-feedback");
-  const buttons = question.querySelectorAll(".demo-options button");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((item) => {
-        item.classList.remove("selected", "correct", "incorrect");
-        item.disabled = true;
-      });
-
-      const selected = button.dataset.option;
-      button.classList.add("selected");
-
-      if (selected === correct) {
-        button.classList.add("correct");
-        feedback.textContent =
-          "Good choice. This habit helps reduce common risks when browsing online.";
-      } else {
-        button.classList.add("incorrect");
-
-        const correctButton = question.querySelector(
-          `.demo-options button[data-option="${correct}"]`
-        );
-
-        correctButton.classList.add("correct");
-        feedback.textContent =
-          "Review the highlighted safer option and consider why it reduces browsing risk.";
-      }
-    });
-  });
-});
-
-/* Malware Demonstration */
-document.querySelectorAll("#malware-demo .demo-question").forEach((question) => {
-  const correct = question.dataset.answer;
-  const feedback = question.querySelector(".demo-feedback");
-  const buttons = question.querySelectorAll(".demo-options button");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((item) => {
-        item.classList.remove("selected", "correct", "incorrect");
-        item.disabled = true;
-      });
-
-      const selected = button.dataset.option;
-      button.classList.add("selected");
-
-      if (selected === correct) {
-        button.classList.add("correct");
-        feedback.textContent =
-          "Good choice. This response helps reduce the risk of further malware-related harm.";
-      } else {
-        button.classList.add("incorrect");
-
-        const correctButton = question.querySelector(
-          `.demo-options button[data-option="${correct}"]`
-        );
-
-        correctButton.classList.add("correct");
-        feedback.textContent =
-          "Review the highlighted safer response and consider why it reduces malware-related risk.";
-      }
-    });
-  });
-});
-
-/* Social Engineering Demonstration */
-document.querySelectorAll("#social-engineering-demo .demo-question").forEach((question) => {
-  const correct = question.dataset.answer;
-  const feedback = question.querySelector(".demo-feedback");
-  const buttons = question.querySelectorAll(".demo-options button");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((item) => {
-        item.classList.remove("selected", "correct", "incorrect");
-        item.disabled = true;
-      });
-
-      const selected = button.dataset.option;
-      button.classList.add("selected");
-
-      if (selected === correct) {
-        button.classList.add("correct");
-        feedback.textContent =
-          "Good choice. Pausing and verifying unexpected requests helps reduce social engineering risk.";
-      } else {
-        button.classList.add("incorrect");
-
-        const correctButton = question.querySelector(
-          `.demo-options button[data-option="${correct}"]`
-        );
-
-        correctButton.classList.add("correct");
-        feedback.textContent =
-          "Review the highlighted safer response and consider how it reduces manipulation risk.";
-      }
-    });
-  });
-});
+})();
 
 /* Site-wide search */
 
