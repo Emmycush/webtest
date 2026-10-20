@@ -746,18 +746,43 @@ updateLearningProgress();
       { name: "apple", label: "Apple" }
     ];
 
-    // Basic visual substitutions only; this is not a complete spoof detector.
+    // Basic Unicode and ASCII lookalike checks.
+    // Educational heuristic only; not a complete spoof detector.
+    const unicodeLookalikes = {
+      "\u0430": "a", "\u03b1": "a",
+      "\u0435": "e", "\u03b5": "e",
+      "\u043e": "o", "\u03bf": "o",
+      "\u0440": "p", "\u03c1": "p",
+      "\u0441": "c", "\u03f2": "c",
+      "\u0445": "x", "\u03c7": "x",
+      "\u0443": "y", "\u03c5": "y",
+      "\u0456": "i", "\u03b9": "i",
+      "\u0458": "j", "\u03ba": "k",
+      "\u043c": "m", "\u03bc": "m",
+      "\u0432": "b", "\u03bd": "v",
+      "\u0442": "t", "\u03c4": "t",
+      "\u04cf": "l", "\u217c": "l"
+    };
+
     const normalizeLookalikes = value =>
-      value.replace(/0/g, "o").replace(/[1i]/g, "l");
+      Array.from(value.normalize("NFKC").toLowerCase())
+        .map(character => unicodeLookalikes[character] || character)
+        .join("")
+        .replace(/0/g, "o")
+        .replace(/1/g, "l");
 
     const lookalikeMatches = [];
 
     for (const label of hostLabels) {
       const normalizedLabel = normalizeLookalikes(label);
+      const alternateLabel = normalizedLabel.replace(/i/g, "l");
 
       for (const brand of familiarBrands) {
         if (
-          normalizedLabel.includes(brand.name) &&
+          (
+            normalizedLabel.includes(brand.name) ||
+            alternateLabel.includes(brand.name)
+          ) &&
           !label.includes(brand.name)
         ) {
           lookalikeMatches.push(brand.label);
