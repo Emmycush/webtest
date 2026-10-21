@@ -447,6 +447,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateDashboard();
 })();
+/* Explore Dashboard menu */
+(() => {
+  const toggle = document.getElementById("dashboardToggle");
+  const panel = document.getElementById("dashboard-panel");
+  const closeButton = document.getElementById("dashboardClose");
+  if (!toggle || !panel || !closeButton) return;
+
+  function closeDashboard(restoreFocus = false) {
+    panel.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open Explore Dashboard menu");
+    if (restoreFocus) toggle.focus();
+  }
+
+  function openDashboard() {
+    panel.hidden = false;
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close Explore Dashboard menu");
+    const searchPanel = document.getElementById("site-search");
+    if (searchPanel && !searchPanel.hidden) {
+      searchPanel.hidden = true;
+      document.getElementById("searchToggle")?.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  toggle.addEventListener("click", () => {
+    if (panel.hidden) openDashboard();
+    else closeDashboard();
+  });
+  closeButton.addEventListener("click", () => closeDashboard(true));
+  panel.querySelectorAll("a").forEach(link =>
+    link.addEventListener("click", () => closeDashboard())
+  );
+  document.addEventListener("click", event => {
+    if (!panel.hidden && !panel.contains(event.target) && !toggle.contains(event.target)) {
+      closeDashboard();
+    }
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !panel.hidden) closeDashboard(true);
+  });
+})();
+
 /* Site-wide search */
 
 const searchToggle = document.getElementById("searchToggle");

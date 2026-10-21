@@ -69,9 +69,81 @@
       >
         Search
       </button>
+      <button
+        class="dashboard-toggle"
+        id="dashboardToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="dashboard-panel"
+        aria-label="Open Explore Dashboard menu"
+      >
+        ☷ Dashboard
+      </button>
 
     </div>
   </header>
+
+  <section class="dashboard-panel" id="dashboard-panel"
+    aria-label="Explore Dashboard"
+    aria-labelledby="dashboard-panel-title" hidden>
+    <div class="dashboard-panel-heading">
+      <div>
+        <p class="eyebrow">CYBERSAFE ACADEMY</p>
+        <h2 id="dashboard-panel-title">Explore Dashboard</h2>
+        <p>Jump directly to lessons, practice activities, and safety resources.</p>
+      </div>
+      <button class="dashboard-close" id="dashboardClose" type="button"
+        aria-label="Close dashboard menu">×</button>
+    </div>
+    <div class="dashboard-groups">
+      <section class="dashboard-group">
+        <h3>Dashboard</h3>
+        <a href="#mission-control">Mission Control</a>
+        <a href="#progress-panel">Learning Progress</a>
+        <a href="#mission-progress-slot">Quiz Results &amp; Progress</a>
+      </section>
+      <section class="dashboard-group">
+        <h3>Learning Library</h3>
+        <a href="strong-passwords-account-protection-guide.html">Passwords &amp; Account Protection</a>
+        <a href="#two-factor">Two-Factor Authentication</a>
+        <a href="phishing.html">Phishing Awareness</a>
+        <a href="malware.html">Malware Safety</a>
+        <a href="social-engineering.html">Social Engineering</a>
+        <a href="wifi-network-security-guide.html">Wi-Fi &amp; Network Security</a>
+        <a href="phone-security.html">Phone Security</a>
+        <a href="email-security.html">Email Security</a>
+        <a href="email-account-security-guide.html">Email Account Protection</a>
+        <a href="online-scams-awareness-guide.html">Online Scams</a>
+        <a href="beginner-cybersecurity-guides.html">Beginner Guides</a>
+        <a href="cybersecurity-for-students.html">Cybersecurity for Students</a>
+      </section>
+      <section class="dashboard-group">
+        <h3>Quizzes &amp; Challenges</h3>
+        <a href="#two-factor">Authentication Quiz</a>
+        <a href="#safe-browsing">Safe Browsing Quiz</a>
+        <a href="#malware-demo">Malware Knowledge Check</a>
+        <a href="#social-engineering-demo">Social Engineering Knowledge Check</a>
+        <a href="practice/phishing-detective.html">Phishing Detective</a>
+        <a href="practice/safe-url-challenge.html">Safe URL Challenge</a>
+        <a href="practice/security-checkup.html">Security Checkup</a>
+      </section>
+      <section class="dashboard-group">
+        <h3>Security Tools</h3>
+        <a href="#password-lab">Password Security Check</a>
+        <a href="#safe-link-inspector">Safe Link Inspector</a>
+        <a href="practical-safety-checklists.html">Practical Safety Checklists</a>
+      </section>
+      <section class="dashboard-group">
+        <h3>About &amp; Policies</h3>
+        <a href="#about">About CyberSafe Academy</a>
+        <a href="#faq">Frequently Asked Questions</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#disclaimer">Disclaimer</a>
+        <a href="#terms">Terms &amp; Conditions</a>
+      </section>
+    </div>
+  </section>
 
   <div class="site-search" id="site-search" hidden>
     <div class="container">
