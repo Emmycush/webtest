@@ -124,58 +124,218 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* SCORED CYBERSECURITY DEMONSTRATIONS */
+/* SCORED CYBERSECURITY DEMONSTRATIONS + SAVED RESULTS */
 (() => {
+  const storageKey = "cybersafeAcademyQuizResults";
+
   const quizConfigs = [
     {
+      key: "twoFactor",
       selector: "#two-factor",
       title: "Two-Factor Authentication Quiz",
       explanation: "Using a second verification step adds protection beyond a password. Never share verification codes with people who contact you unexpectedly."
     },
     {
+      key: "safeBrowsing",
       selector: "#safe-browsing",
       title: "Safe Browsing Quiz",
       explanation: "Check website addresses carefully, avoid unexpected downloads, and reach sensitive accounts through trusted routes. HTTPS alone does not prove a site is trustworthy."
     },
     {
+      key: "malware",
       selector: "#malware-demo",
       title: "Malware Safety Quiz",
       explanation: "Pause suspicious activity, avoid unknown downloads, and use trusted security or recovery guidance. Do not disable protections to make suspicious software run."
     },
     {
+      key: "socialEngineering",
       selector: "#social-engineering-demo",
       title: "Social Engineering Quiz",
       explanation: "Urgency and claims of authority can be manipulation tactics. Verify unexpected requests through a separate, official channel and never disclose your password."
     }
   ];
 
+  function readResults() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey));
+      return saved && typeof saved === "object" && !Array.isArray(saved)
+        ? saved
+        : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveResults(results) {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(results));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function createElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    return element;
+  }
+
+  const dashboard = createElement("section", "quiz-results-dashboard");
+  dashboard.id = "quiz-results-dashboard";
+  dashboard.setAttribute("aria-labelledby", "quiz-results-title");
+
+  const header = createElement("div", "quiz-results-header");
+  header.append(
+    createElement("span", "eyebrow", "MISSION CONTROL · ASSESSMENT"),
+    createElement("h3", "", "Quiz Results"),
+    createElement(
+      "p",
+      "",
+      "Your latest scores and personal bests, saved in this browser."
+    )
+  );
+
+  const overview = createElement("p", "quiz-results-overview");
+  overview.id = "quiz-results-overview";
+  overview.setAttribute("aria-live", "polite");
+
+  const grid = createElement("div", "quiz-results-grid");
+  dashboard.append(header, overview, grid);
+
+  const missionSlot = document.getElementById("mission-progress-slot");
+  if (missionSlot) {
+    missionSlot.insertAdjacentElement("afterend", dashboard);
+  }
+
+  function updateDashboard() {
+    const results = readResults();
+    const completed = quizConfigs.filter((config) => {
+      const result = results[config.key];
+      return result &&
+        Number.isInteger(result.latestScore) &&
+        Number.isInteger(result.totalQuestions) &&
+        result.totalQuestions > 0 &&
+        result.latestScore >= 0 &&
+        result.latestScore <= result.totalQuestions;
+    }).length;
+
+    overview.textContent =
+      `Quizzes completed: ${completed} / ${quizConfigs.length}. ` +
+      (completed === quizConfigs.length
+        ? "All four quizzes have recorded results. Keep practising!"
+        : "Complete a quiz to record your score.");
+
+    grid.replaceChildren();
+
+    quizConfigs.forEach((config) => {
+      const result = results[config.key];
+      const card = createElement("article", "quiz-result-card");
+      const title = createElement("h4", "", config.title);
+      const latest = createElement(
+        "p",
+        "quiz-result-latest",
+        result
+          ? `Latest score: ${result.latestScore} / ${result.totalQuestions} (${result.latestPercentage}%)`
+          : "Latest score: Not completed"
+      );
+      const best = createElement(
+        "p",
+        "quiz-result-best",
+        result
+          ? `Personal best: ${result.bestScore} / ${result.bestTotal} (${result.bestPercentage}%)`
+          : "Personal best: —"
+      );
+      const attempts = createElement(
+        "p",
+        "quiz-result-attempts",
+        result
+          ? `Completed attempts: ${result.attempts}`
+          : "Complete all questions to record a result."
+      );
+
+      const track = createElement("div", "quiz-result-track");
+      track.setAttribute("role", "progressbar");
+      track.setAttribute("aria-label", `${config.title} personal best`);
+      track.setAttribute("aria-valuemin", "0");
+      track.setAttribute("aria-valuemax", "100");
+      const fill = createElement("span", "quiz-result-fill");
+      const bestPercentage = result ? result.bestPercentage : 0;
+      fill.style.width = `${bestPercentage}%`;
+      track.setAttribute("aria-valuenow", String(bestPercentage));
+      track.appendChild(fill);
+
+      card.append(title, latest, best, track, attempts);
+      grid.appendChild(card);
+    });
+  }
+
+  function recordResult(config, score, total) {
+    const results = readResults();
+    const percentage = Math.round((score / total) * 100);
+    const previous = results[config.key];
+    const previousBest = previous &&
+      Number.isFinite(previous.bestPercentage)
+      ? previous.bestPercentage
+      : -1;
+
+    const isNewBest = percentage > previousBest;
+
+    results[config.key] = {
+      latestScore: score,
+      totalQuestions: total,
+      latestPercentage: percentage,
+      bestScore: isNewBest || !previous
+        ? score
+        : previous.bestScore,
+      bestTotal: isNewBest || !previous
+        ? total
+        : previous.bestTotal,
+      bestPercentage: Math.max(previousBest, percentage),
+      attempts: (Number.isInteger(previous && previous.attempts)
+        ? previous.attempts
+        : 0) + 1
+    };
+
+    const saved = saveResults(results);
+    updateDashboard();
+    return saved;
+  }
+
   quizConfigs.forEach((config) => {
     const root = document.querySelector(config.selector);
     if (!root) return;
 
-    const questions = Array.from(root.querySelectorAll(".demo-question"));
+    const questions = Array.from(
+      root.querySelectorAll(".demo-question")
+    );
     if (!questions.length) return;
 
     let score = 0;
     let answered = 0;
 
-    const panel = document.createElement("div");
-    panel.className = "quiz-score-panel";
+    const panel = createElement("div", "quiz-score-panel");
     panel.setAttribute("aria-label", config.title);
 
-    const heading = document.createElement("p");
-    heading.className = "quiz-score-heading";
-    heading.textContent = config.title;
-
-    const status = document.createElement("p");
-    status.className = "quiz-score-status";
+    const heading = createElement(
+      "p",
+      "quiz-score-heading",
+      config.title
+    );
+    const status = createElement(
+      "p",
+      "quiz-score-status",
+      `Score: 0 / ${questions.length} · Answer all questions to finish`
+    );
     status.setAttribute("aria-live", "polite");
-    status.textContent = `Score: 0 / ${questions.length} · Answer all questions to finish`;
 
-    const retry = document.createElement("button");
+    const retry = createElement(
+      "button",
+      "btn btn-primary quiz-retry",
+      "Try Again"
+    );
     retry.type = "button";
-    retry.className = "btn btn-primary quiz-retry";
-    retry.textContent = "Try Again";
     retry.hidden = true;
 
     panel.append(heading, status, retry);
@@ -192,8 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
           if (buttons.some((item) => item.disabled)) return;
 
-          const selected = button.dataset.option;
-          const isCorrect = selected === correct;
+          const isCorrect = button.dataset.option === correct;
 
           buttons.forEach((item) => {
             item.disabled = true;
@@ -205,8 +364,9 @@ document.addEventListener("DOMContentLoaded", () => {
           if (isCorrect) {
             score += 1;
             button.classList.add("correct");
-            feedback.textContent =
-              `Correct! ${config.explanation}`;
+            if (feedback) {
+              feedback.textContent = `Correct! ${config.explanation}`;
+            }
           } else {
             button.classList.add("incorrect");
             const correctButton = buttons.find(
@@ -219,13 +379,17 @@ document.addEventListener("DOMContentLoaded", () => {
               ? correctButton.textContent.trim()
               : "the highlighted answer";
 
-            feedback.textContent =
-              `Not quite. The safer choice is: ${correctText}. ${config.explanation}`;
+            if (feedback) {
+              feedback.textContent =
+                `Not quite. The safer choice is: ${correctText}. ` +
+                config.explanation;
+            }
           }
 
           answered += 1;
           status.textContent =
-            `Score: ${score} / ${questions.length} · Answered ${answered} of ${questions.length}`;
+            `Score: ${score} / ${questions.length} · ` +
+            `Answered ${answered} of ${questions.length}`;
 
           if (answered === questions.length) {
             const percentage = Math.round(
@@ -239,6 +403,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 : score >= Math.ceil(questions.length * 2 / 3)
                   ? "Good progress. Review any missed answers."
                   : "Keep learning and try again.");
+
+            const saved = recordResult(
+              config,
+              score,
+              questions.length
+            );
+
+            if (!saved) {
+              status.textContent +=
+                " Results could not be saved in this browser.";
+            }
 
             retry.hidden = false;
           }
@@ -263,12 +438,15 @@ document.addEventListener("DOMContentLoaded", () => {
       status.textContent =
         `Score: 0 / ${questions.length} · Answer all questions to finish`;
       retry.hidden = true;
-
-      questions[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      questions[0].scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
     });
   });
-})();
 
+  updateDashboard();
+})();
 /* Site-wide search */
 
 const searchToggle = document.getElementById("searchToggle");
