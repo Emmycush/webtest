@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://emmycush.github.io/webtest/sitemap.xml
+Sitemap: https://cybersafeacademy.site/sitemap.xml

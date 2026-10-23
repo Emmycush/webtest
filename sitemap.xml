@@ -1,64 +1,108 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://cybersafeacademy.site/</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/beginner-cybersecurity-guides.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/cybersecurity-for-students.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/email-account-security-guide.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/email-security.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/malware.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/online-scams-awareness-guide.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/phishing-attack-beginners-guide.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/phishing.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/phone-security.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/practical-safety-checklists.html</loc>
   </url>
-
+  <url>
+    <loc>https://cybersafeacademy.site/practice/beginner-cybersecurity-guides.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/cybersecurity-for-students.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/email-account-security-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/email-security.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/malware.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/online-scams-awareness-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/phishing-attack-beginners-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/phishing-detective.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/phishing.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/phone-security.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/practical-safety-checklists.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/privacy-personal-data.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/safe-browsing.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/safe-url-challenge.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/security-checkup.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/social-engineering.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/strong-passwords-account-protection-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/two-factor-authentication.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/wifi-network-security-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cybersafeacademy.site/practice/wifi-security.html</loc>
+  </url>
   <url>
     <loc>https://cybersafeacademy.site/social-engineering.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/strong-passwords-account-protection-guide.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/wifi-network-security-guide.html</loc>
   </url>
-
   <url>
     <loc>https://cybersafeacademy.site/wifi-security.html</loc>
   </url>
-
 </urlset>

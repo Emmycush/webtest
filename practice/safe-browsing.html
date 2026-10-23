@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safe Browsing Quiz | CyberSafe Academy</title>
+  <meta name="description" content="Practice safer browsing decisions involving suspicious websites, browser warnings, downloads, and deceptive pop-ups.">
+  <meta property="og:title" content="Safe Browsing Quiz | CyberSafe Academy">
+  <meta property="og:description" content="Practice safer browsing decisions involving suspicious websites, browser warnings, downloads, and deceptive pop-ups.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Safe Browsing Quiz</h1>
+    <p>Test how you respond to common website and browser risks.</p>
+  </header>
+
+  <main>
+    <section id="quiz-container" aria-labelledby="question">
+      <p id="progress" aria-live="polite"></p>
+      <h2 id="question" tabindex="-1"></h2>
+      <div id="answers"></div>
+      <p id="feedback" aria-live="polite"></p>
+      <button id="next-btn" type="button" hidden>Next Question</button>
+    </section>
+
+    <section id="result" aria-labelledby="result-heading" hidden>
+      <h2 id="result-heading">Practice Complete</h2>
+      <p id="score"></p>
+      <p id="result-message"></p>
+      <button id="restart-btn" type="button">Try Again</button>
+      <p><a href="../beginner-cybersecurity-guides.html">← Back to Beginner Cybersecurity Guides</a></p>
+      <p><a href="../index.html">Return to CyberSafe Academy Home</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 CyberSafe Academy</p>
+    <p>Educational Cybersecurity Resources</p>
+  </footer>
+
+  <script src="../js/safe-browsing.js"></script>
+</body>
+</html>
